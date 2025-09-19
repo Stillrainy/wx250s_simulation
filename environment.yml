@@ -1,0 +1,11 @@
+name: wx250s_arm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - numpy<2.0
+  - spatialmath-python
+  - notebook
+  - pip:
+      - urchin
