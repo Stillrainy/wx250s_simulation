@@ -11,7 +11,7 @@ This project provides simulation and control capabilities for the Interbotix WX2
 ## Prerequisites
 
 - **Operating System**: macOS, Linux, or Windows
-- **Python**: 3.10 (specified in environment)
+- **Python**: 3.10+ (recommended 3.10 for best compatibility)
 
 ## Installation
 
@@ -21,32 +21,53 @@ Ensure you have the project files in your working directory with the following s
 ```
 wx250s_simulation/
 ├── environment.yml
+├── requirements.txt
+├── robot.py
 ├── test_robot.ipynb
 └── assets/
     ├── wx250s.urdf
     └── meshes/
-        ├── base.stl
-        ├── gripper*.stl
-        ├── *.stl files
-        └── interbotix_black.png
+        └── *.stl files
 ```
 
-### 2. Create Conda Environment
+### 2. Environment Setup
+
+Choose one of the following installation methods:
+
+#### Option A: Using Conda (Recommended)
 
 Navigate to the project directory and create the conda environment:
 
 ```bash
 cd path/to/wx250s_simulation
 conda env create -f environment.yml
+conda activate wx250s_arm
 ```
 
 This creates a new conda environment named `wx250s_arm` with:
 - Python 3.10
-- NumPy
+- NumPy (<2.0)
+- Spatialmath-python
 - Jupyter Notebook
 - Urchin
 
+#### Option B: Using pip
+
+If you prefer to use pip or don't have conda installed:
+
+```bash
+cd path/to/wx250s_simulation
+# Optional: create a virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
 ### 3. Example Usage
+
+Activate your environment and run the following:
 
 ```python
 import numpy as np

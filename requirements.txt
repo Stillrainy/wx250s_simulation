@@ -1,0 +1,8 @@
+# WX250s Robotic Arm Simulation Requirements
+# Install with: pip install -r requirements.txt
+
+# Core dependencies
+numpy<2.0
+spatialmath-python
+notebook
+urchin
