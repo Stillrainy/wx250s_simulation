@@ -1,0 +1,29 @@
+# MATLAB temporary files
+*.asv
+*.bak
+*.log
+*.tmp
+*.mat.orig
+
+# MATLAB build artifacts and generated files
+/codegen/
+/slprj/
+/target/
+*.mex*
+*.p
+*.cmli
+*.cpt
+*.mlappinstall
+*.mltbx
+
+# Simulink specific files
+*.slxc
+
+# Project specific files or user preferences
+*.prj
+.project
+.settings/
+
+# Operating system specific files
+.DS_Store
+Thumbs.db
