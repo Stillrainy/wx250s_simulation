@@ -7,6 +7,7 @@ classdef wx250s < handle
     properties (Access = private)
         robot           % rigidBodyTree object
         joint_positions % Current joint positions
+        zero_offset     % Zero position offset for joints 2 and 3
     end
     
     properties (Access = public)
@@ -38,8 +39,14 @@ classdef wx250s < handle
             % Initialize tool tip offset as identity matrix
             obj.tool_T_tip_offset = eye(4);
             
+            % Set the zero position offset for joint 2 and 3
+            obj.zero_offset = atan(50/250);
+            
             % Extract joint limits
             obj.extractJointLimits();
+            
+            % Apply zero offset
+            obj.applyOffset();
         end
         
         function success = setJointPositions(obj, joint_positions)
@@ -53,6 +60,7 @@ classdef wx250s < handle
             
             if obj.checkInputs(joint_positions)
                 obj.joint_positions = joint_positions(:);
+                obj.applyOffset();
                 success = true;
             else
                 success = false;
@@ -66,6 +74,9 @@ classdef wx250s < handle
             %   positions: Current joint positions as column vector
             
             positions = obj.joint_positions;
+            % Remove offset to return original joint positions
+            positions(2) = positions(2) + obj.zero_offset;
+            positions(3) = positions(3) - obj.zero_offset;
         end
         
         function pose = getEePose(obj)
@@ -105,9 +116,9 @@ classdef wx250s < handle
                 config(i).JointPosition = obj.joint_positions(i);
             end
             
-            % Show robot
+            % Show robot with specified options
             figure;
-            show(obj.robot, config);
+            show(obj.robot, config, 'Frames', 'off');
             title('wx250s Robot Configuration');
             axis equal;
             grid on;
@@ -221,6 +232,14 @@ classdef wx250s < handle
             else
                 error('No suitable end-effector body found in robot model');
             end
+        end
+        
+        function applyOffset(obj)
+            % Apply zero position offset to specific joints
+            % Similar to Python version: subtract offset from joint 2, add to joint 3
+            
+            obj.joint_positions(2) = obj.joint_positions(2) - obj.zero_offset;
+            obj.joint_positions(3) = obj.joint_positions(3) + obj.zero_offset;
         end
     end
 end
