@@ -38,6 +38,10 @@ class wx250s:
     def show(self) -> None:
         self._robot.show(self._joint_positions)
 
+    def animate(self, cfgs) -> None:
+        self._robot.animate(cfgs)
+        pass
+
     def _check_inputs(
             self,
             joint_positions: Union[List[float], np.ndarray]
