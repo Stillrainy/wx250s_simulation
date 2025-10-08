@@ -1,0 +1,20 @@
+# MANIFEST.in
+# Include additional files in the package distribution
+
+# Include the README and requirements files
+include README.md
+include requirements.txt
+include environment.yml
+
+# Include all asset files
+recursive-include wx250s_simulation/assets *
+recursive-include wx250s_simulation/assets/meshes *
+
+# Include the notebook
+include test_robot.ipynb
+
+# Exclude compiled Python files
+global-exclude *.pyc
+global-exclude *.pyo
+global-exclude *~
+global-exclude __pycache__

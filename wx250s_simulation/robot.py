@@ -3,9 +3,20 @@ from urchin import URDF
 from typing import List, Union
 import logging
 from pathlib import Path
+import pkg_resources
 
-BASE_DIR = Path(__file__).resolve().parent
-URDF_PATH = BASE_DIR / 'assets' / 'wx250s.urdf'
+# Get the path to the assets directory within the package
+def get_asset_path(asset_name: str) -> Path:
+    """Get the path to an asset file within the package."""
+    try:
+        # Try to get the path using pkg_resources (works when installed)
+        package_path = pkg_resources.resource_filename('wx250s_simulation', f'assets/{asset_name}')
+        return Path(package_path)
+    except (ImportError, pkg_resources.DistributionNotFound):
+        # Fallback to relative path (for development)
+        return Path(__file__).resolve().parent / 'assets' / asset_name
+
+URDF_PATH = get_asset_path('wx250s.urdf')
 
 
 class wx250s:

@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wx250s_simulation"
+version = "0.1.0"
+description = "A Python package for simulating the WX250s robotic arm"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Your Name", email = "your.email@example.com"}
+]
+keywords = ["robotics", "simulation", "wx250s", "urdf", "kinematics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Robotics",
+]
+dependencies = [
+    "numpy<2.0",
+    "spatialmath-python",
+    "notebook",
+    "urchin",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Stillrainy/wx250s_simulation"
+"Bug Reports" = "https://github.com/Stillrainy/wx250s_simulation/issues"
+"Source" = "https://github.com/Stillrainy/wx250s_simulation"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["wx250s_simulation*"]
+
+[tool.setuptools.package-data]
+wx250s_simulation = ["assets/*", "assets/meshes/*"]
